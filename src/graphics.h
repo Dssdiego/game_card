@@ -6,12 +6,14 @@
 #define MARIO_GRAPHICS_H
 
 #include <SDL.h>
+#include "color.h"
 
 namespace Graphics
 {
     void init();
     void frame();
     void clear();
+    void clear(Color color);
     void draw();
     void cleanup();
 }

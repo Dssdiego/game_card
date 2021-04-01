@@ -87,7 +87,14 @@ void Graphics::init()
  */
 void Graphics::clear()
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    Color color = Color::Pink;
+    glClearColor(color.r, color.g, color.b, color.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Graphics::clear(Color color)
+{
+    glClearColor(color.r, color.g, color.b, color.a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
