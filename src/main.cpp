@@ -11,9 +11,9 @@
 #endif
 
 #include <SDL.h>
-#include "game.h"
-#include "resource_manager.h"
-#include "graphics.h"
+#include "game/game.h"
+#include "engine/resource_manager.h"
+#include "engine/graphics.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;

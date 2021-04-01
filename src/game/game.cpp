@@ -4,10 +4,15 @@
 
 #include <glm/ext.hpp>
 #include "game.h"
-#include "sprite_renderer.h"
-#include "resource_manager.h"
+#include "../engine/sprite_renderer.h"
+#include "../engine/resource_manager.h"
 
 SpriteRenderer *spriteRenderer;
+
+int remainingLives;
+int remainingTime;
+int coins;
+int score;
 
 Game::Game(unsigned int width, unsigned int height) : state(ACTIVE), keys(), width(width), height(height)
 {}

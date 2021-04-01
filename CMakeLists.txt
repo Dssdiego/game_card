@@ -56,8 +56,13 @@ include_directories(${SDL2_INCLUDE_DIR}
                     ${SDL2_IMAGE_INCLUDE_DIR})
 
 # load source and header files
-file(GLOB SOURCE_FILES "src/*.h" "src/*.cpp")
-add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES} src/graphics.cpp src/graphics.h)
+file(GLOB SOURCE_FILES
+        "src/engine/*.h"
+        "src/engine/*.cpp"
+        "src/game/*.h"
+        "src/game/*.cpp"
+        src/main.cpp)
+add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
 
 # include libraries
 include_directories(libs/glm
