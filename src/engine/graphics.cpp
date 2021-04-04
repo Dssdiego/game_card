@@ -2,6 +2,9 @@
 // Created by Diego Santos Seabra on 31/03/21.
 //
 
+#define GL_GLEXT_PROTOTYPES
+#define GL_SILENCE_DEPRECATION
+
 #include "graphics.h"
 
 #include <SDL.h>
@@ -11,10 +14,13 @@
 #include <glew.h>
 #else
 #include <SDL_opengl.h>
+#include <SDL_opengl_glext.h>
+
 #endif
 
 SDL_Window *window;
 SDL_GLContext glContext;
+unsigned int quadVAO;
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -80,6 +86,41 @@ void Graphics::init()
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+
+    // Init Render Configurations for Sprite Drawing
+    initSpriteRenderData();
+}
+
+void Graphics::initSpriteRenderData()
+{
+    // Configure VAO/VBO
+    unsigned int vbo;
+
+    float vertices[] = {
+            // position //texture
+            0.0f, 1.0f, 0.0f, 1.0f,
+            1.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 0.0f,
+
+            0.0f, 1.0f, 0.0f, 1.0f,
+            1.0f, 1.0f, 1.0f, 1.0f,
+            1.0f, 0.0f, 1.0f, 0.0f
+    }; // (0,0) being top-left corner of the quad
+
+    glGenVertexArrays(1, &quadVAO);
+    glGenBuffers(1, &vbo);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindVertexArray(quadVAO);       // bind
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind
+    glBindVertexArray(0);
+
+//    glDeleteVertexArrays(1, &vbo);
+    glDeleteBuffers(1, &vbo);
 }
 
 /**
@@ -104,11 +145,23 @@ void Graphics::draw()
     SDL_GL_SwapWindow(window);
 }
 
-void Graphics::cleanup()
+void Graphics::shutdown()
 {
+    glDeleteVertexArrays(1, &quadVAO);
+
     SDL_GL_DeleteContext(glContext);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
+WindowSize Graphics::getWindowSize()
+{
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+    return WindowSize(w,h);
+}
 
+unsigned int Graphics::getQuadVAO()
+{
+    return quadVAO;
+}

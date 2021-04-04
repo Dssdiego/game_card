@@ -62,7 +62,6 @@ void SpriteRenderer::drawSprite(Texture2D texture, glm::vec2 position, glm::vec2
     this->shader.Use();
     glm::mat4 model = glm::mat4(1.0f);
 
-    // Put origin of the model in the center
     model = glm::translate(model, glm::vec3(position, 0.0f));
 
     model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
