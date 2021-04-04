@@ -49,7 +49,7 @@ int main()
         game.update(deltaTime);
 
         // Game render
-        Graphics::clear();
+        Graphics::clear(Color::Pink);
         game.render();
 
         // Process inputs
