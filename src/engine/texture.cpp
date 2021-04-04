@@ -15,7 +15,7 @@
 
 Texture2D::Texture2D()
         : Width(0), Height(0), InternalFormat(GL_RGB), ImageFormat(GL_RGB), WrapS(GL_REPEAT), WrapT(GL_REPEAT),
-          FilterMin(GL_LINEAR), FilterMax(GL_LINEAR)
+          FilterMin(GL_NEAREST), FilterMax(GL_NEAREST)
 {
     glGenTextures(1, &this->Id);
 }
@@ -27,7 +27,8 @@ void Texture2D::Generate(unsigned int width, unsigned int height, unsigned char 
 
     // Create texture
     glBindTexture(GL_TEXTURE_2D, this->Id);
-    glTexImage2D(GL_TEXTURE_2D, 0, this->InternalFormat, width, height, 0, this->ImageFormat, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, this->InternalFormat, width, height,
+                 0, this->ImageFormat, GL_UNSIGNED_BYTE, data);
 
     // Texture wrap and filter modes
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->WrapS);
