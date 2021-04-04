@@ -52,11 +52,24 @@ else()
     # Setup FMOD library
     set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
     set(FMOD_LIBRARY
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmod.dylib"
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmodL.dylib")
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/osx/libfmod.dylib"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/osx/libfmodL.dylib")
     file(COPY
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmod.dylib"
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmodL.dylib"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/osx/libfmod.dylib"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/osx/libfmodL.dylib"
+            DESTINATION ${CMAKE_BINARY_DIR})
+endif()
+
+# Linux Configurations
+if(UNIX AND NOT APPLE)
+    # Setup FMOD library
+    set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
+    set(FMOD_LIBRARY
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.8"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.8")
+    file(COPY
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.8"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.8"
             DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
