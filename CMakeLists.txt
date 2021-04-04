@@ -48,10 +48,19 @@ else()
     # Find OpenGL
     find_package(OpenGL REQUIRED)
     # find_package(SDL2_ttf REQUIRED)
+
+    # Setup FMOD library
+    set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
+    set(FMOD_LIBRARY
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmod.dylib"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmodL.dylib")
+    file(COPY
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmod.dylib"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/libfmodL.dylib"
+            DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
 # include SDL and OpenGL directories
-message(${OPENGL_INCLUDE_DIR})
 include_directories(${SDL2_INCLUDE_DIR}
                     ${SDL2_IMAGE_INCLUDE_DIR})
 
@@ -63,7 +72,8 @@ add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
 
 # include libraries
 include_directories(libs/glm
-                    libs/stb)
+                    libs/stb
+                    ${FMOD_INCLUDE_DIR})
 
 # make assets directory in build
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/assets)
@@ -79,4 +89,5 @@ target_link_libraries(${PROJECT_NAME}
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARIES}
         ${GLEW_LIBRARY}
-        ${OPENGL_LIBRARIES})
+        ${OPENGL_LIBRARIES}
+        ${FMOD_LIBRARY})

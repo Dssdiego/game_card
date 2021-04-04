@@ -14,6 +14,7 @@
 #include "game/game.h"
 #include "engine/resource_manager.h"
 #include "engine/graphics.h"
+#include "engine/audio.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -26,6 +27,7 @@ int main()
 {
     // Initialization
     Graphics::init();
+    Audio::init();
     game.init();
 
     // Delta Time
@@ -62,6 +64,9 @@ int main()
             if (event.type == SDL_KEYDOWN && event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                 closeWindow = true;
 
+            if (event.type == SDL_KEYDOWN && event.key.keysym.scancode == SDL_SCANCODE_SPACE)
+                Audio::playTitle();
+
             // REVIEW: Might be wrong
             if (event.key.keysym.scancode >= 0)
             {
@@ -77,7 +82,8 @@ int main()
 
     // Cleanup resources
     ResourceManager::Clear();
-    Graphics::cleanup();
+    Graphics::shutdown();
+    Audio::shutdown();
 
     // Closes the application
     return EXIT_SUCCESS;
