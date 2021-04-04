@@ -7,6 +7,7 @@
 
 #include <SDL.h>
 #include "color.h"
+#include "config.h"
 
 struct WindowSize
 {
@@ -16,7 +17,7 @@ struct WindowSize
 
 namespace Graphics
 {
-    void init();
+    void init(Config *config);
     void initSpriteRenderData();
 
     void frame();

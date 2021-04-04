@@ -22,11 +22,15 @@ const int SCREEN_HEIGHT = 600;
 bool closeWindow = false;
 
 Game game(SCREEN_WIDTH, SCREEN_HEIGHT);
+Config config;
 
 int main()
 {
+    // Read configuration
+    config.readFile();
+
     // Initialization
-    Graphics::init();
+    Graphics::init(&config);
     Audio::init();
     game.init();
 

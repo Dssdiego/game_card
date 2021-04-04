@@ -1,0 +1,8 @@
+[vsync]
+false
+
+[fullscreen]
+false
+
+[resolution]
+400x400

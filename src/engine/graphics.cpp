@@ -13,6 +13,7 @@
 #ifdef _WIN32
 #include <glew.h>
 #else
+
 #include <SDL_opengl.h>
 #include <SDL_opengl_glext.h>
 
@@ -25,7 +26,7 @@ unsigned int quadVAO;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
-void Graphics::init()
+void Graphics::init(Config *config)
 {
     // Init SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -62,7 +63,12 @@ void Graphics::init()
     glContext = SDL_GL_CreateContext(window);
 
     // VSync
-//    SDL_GL_SetSwapInterval(1);
+    if (config->isVsync())
+        SDL_GL_SetSwapInterval(1);
+
+    // Fullscreen
+    if (config->isFullscreen())
+        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
     // Window current context
     SDL_GL_MakeCurrent(window, glContext);
@@ -158,7 +164,7 @@ WindowSize Graphics::getWindowSize()
 {
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
-    return WindowSize(w,h);
+    return WindowSize(w, h);
 }
 
 unsigned int Graphics::getQuadVAO()
