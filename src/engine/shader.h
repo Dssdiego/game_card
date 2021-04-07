@@ -8,6 +8,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <vector>
+#include "color.h"
 
 enum ShaderObjectType
 {
@@ -31,15 +32,16 @@ public:
     void Compile(std::vector<std::string> &source);
 
     // Utility functions
-    void SetFloat(const char *name, float value, bool useShader = false);
+    Shader SetFloat(const char *name, float value, bool useShader = false);
     Shader &SetInteger(const char *name, int value, bool useShader = false);
-    void SetVector2f(const char *name, float x, float y, bool useShader = false);
-    void SetVector2f(const char *name, glm::vec2 &value, bool useShader = false);
-    void SetVector3f(const char *name, float x, float y, float z, bool useShader = false);
-    void SetVector3f(const char *name, glm::vec3 &value, bool useShader = false);
-    void SetVector4f(const char *name, float x, float y, float z, float w, bool useShader = false);
-    void SetVector4f(const char *name, glm::vec4 &value, bool useShader = false);
-    void SetMatrix4(const char *name, glm::mat4 &matrix, bool useShader = false);
+    Shader SetVector2f(const char *name, float x, float y, bool useShader = false);
+    Shader SetVector2f(const char *name, glm::vec2 &value, bool useShader = false);
+    Shader SetVector3f(const char *name, Color &color, bool useShader = false);
+    Shader SetVector3f(const char *name, float x, float y, float z, bool useShader = false);
+    Shader SetVector3f(const char *name, glm::vec3 &value, bool useShader = false);
+    Shader SetVector4f(const char *name, float x, float y, float z, float w, bool useShader = false);
+    Shader SetVector4f(const char *name, glm::vec4 &value, bool useShader = false);
+    Shader SetMatrix4(const char *name, glm::mat4 &matrix, bool useShader = false);
 private:
     // Checks if compilation or linking failed and if so, print the error logs
     void checkCompileErrors(unsigned int object, ShaderObjectType type);
