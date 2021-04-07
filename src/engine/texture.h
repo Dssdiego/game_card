@@ -27,6 +27,8 @@ public:
 
     Texture2D();
 
+    void Create();
+
     // Generate texture from image data
     void Generate(unsigned int width, unsigned int height, unsigned char *data);
 

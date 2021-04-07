@@ -8,7 +8,9 @@
 #ifdef _WIN32
 #include <glew.h>
 #else
+
 #include <SDL_opengl.h>
+
 #endif
 
 #include "texture.h"
@@ -16,6 +18,9 @@
 Texture2D::Texture2D()
         : Width(0), Height(0), InternalFormat(GL_RGB), ImageFormat(GL_RGB), WrapS(GL_REPEAT), WrapT(GL_REPEAT),
           FilterMin(GL_NEAREST), FilterMax(GL_NEAREST)
+{ }
+
+void Texture2D::Create()
 {
     glGenTextures(1, &this->Id);
 }
