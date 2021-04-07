@@ -23,7 +23,7 @@ uniform vec3 spriteColor;
 
 void main()
 {
-    vec4 texColor = texture(image, texCoords);
+    vec4 texColor = vec4(spriteColor, 1.0) * texture(image, texCoords);
     // Discard the pixel when finding an alpha value
     if(texColor.a < 0.1f)
         discard;
