@@ -92,41 +92,6 @@ void Graphics::init(Config *config)
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-
-    // Init Render Configurations for Sprite Drawing
-    initSpriteRenderData();
-}
-
-void Graphics::initSpriteRenderData()
-{
-    // Configure VAO/VBO
-    unsigned int vbo;
-
-    float vertices[] = {
-            // position //texture
-            0.0f, 1.0f, 0.0f, 1.0f,
-            1.0f, 0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 0.0f,
-
-            0.0f, 1.0f, 0.0f, 1.0f,
-            1.0f, 1.0f, 1.0f, 1.0f,
-            1.0f, 0.0f, 1.0f, 0.0f
-    }; // (0,0) being top-left corner of the quad
-
-    glGenVertexArrays(1, &quadVAO);
-    glGenBuffers(1, &vbo);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindVertexArray(quadVAO);       // bind
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), nullptr);
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind
-    glBindVertexArray(0);
-
-//    glDeleteVertexArrays(1, &vbo);
-    glDeleteBuffers(1, &vbo);
 }
 
 /**
@@ -165,9 +130,4 @@ WindowSize Graphics::getWindowSize()
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
     return WindowSize(w, h);
-}
-
-unsigned int Graphics::getQuadVAO()
-{
-    return quadVAO;
 }

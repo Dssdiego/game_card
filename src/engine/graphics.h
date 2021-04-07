@@ -18,7 +18,6 @@ struct WindowSize
 namespace Graphics
 {
     void init(Config *config);
-    void initSpriteRenderData();
 
     void frame();
 
@@ -31,12 +30,9 @@ namespace Graphics
 
     // Cleanup
     void shutdown();
-    // TODO: Implement
-    void cleanUpRenderData();
 
     // Getters
     WindowSize getWindowSize();
-    unsigned int getQuadVAO();
 }
 
 
