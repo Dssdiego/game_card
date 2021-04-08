@@ -73,6 +73,11 @@ void Renderer2D::drawQuad(glm::vec2 position, glm::vec2 size, Color color)
     drawSprite(ResourceManager::GetTexture("square_white"), position, size, color);
 }
 
+void Renderer2D::drawCursor(glm::vec2 position, glm::vec2 size, Color color)
+{
+    drawSprite(ResourceManager::GetTexture("cursor_hand"), position, size, color);
+}
+
 void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 size, Color color)
 {
     glm::mat4 model = glm::mat4(1.0f);
@@ -103,19 +108,6 @@ void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, C
 {
     // Configure VAO/VBO
     unsigned int vbo;
-
-//    float vertices[] = {
-//            // position //texture
-//            // first triangle
-//            0.0f, 1.0f, 0.0f, 1.0f, // top-left
-//            1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-//            0.0f, 0.0f, 0.0f, 0.0f, // bottom-left
-//
-//            // second triangle
-//            0.0f, 1.0f, 0.0f, 1.0f, // top-left
-//            1.0f, 1.0f, 1.0f, 1.0f, // top-right
-//            1.0f, 0.0f, 1.0f, 0.0f  // bottom-right
-//    }; // (0,0) being top-left corner of the quad
 
     glm::vec2 texCoords[4];
     texCoords[0] = sprite.texCoords[0];

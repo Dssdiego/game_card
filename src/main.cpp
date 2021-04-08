@@ -15,6 +15,7 @@
 #include "engine/resource_manager.h"
 #include "engine/graphics.h"
 #include "engine/audio.h"
+#include "engine/input.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -34,8 +35,11 @@ int main()
     Audio::init();
     game.init();
 
+    // Hides the cursor
+    SDL_ShowCursor(SDL_DISABLE);
+
     // Delta Time
-    float deltaTime = 0.0f;
+    float deltaTime = 1.0f / 60.0f;
     float lastFrame = 0.0f;
 
     // Window loop
@@ -70,6 +74,14 @@ int main()
 
             if (event.type == SDL_KEYDOWN && event.key.keysym.scancode == SDL_SCANCODE_SPACE)
                 Audio::playTitle();
+
+            // Get mouse position
+            // REVIEW: Where to put this method?
+            int mouseX, mouseY;
+            SDL_GetMouseState(&mouseX, &mouseY);
+            Input::setMousePosition(glm::vec2(mouseX, mouseY));
+//            std::cout << "MouseX: " << mouseX << std::endl;
+//            std::cout << "MouseY: " << mouseY << std::endl;
 
             // REVIEW: Might be wrong
             if (event.key.keysym.scancode >= 0)

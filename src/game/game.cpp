@@ -8,6 +8,7 @@
 #include "../engine/scene.h"
 #include "../engine/renderer.h"
 #include "../engine/sprite_atlas.h"
+#include "../engine/input.h"
 
 Renderer2D *renderer2D;
 
@@ -31,7 +32,8 @@ Game::~Game()
 
 void Game::init()
 {
-//    ResourceManager::LoadTexture("assets/sprites/square_white.png", true, "square_white");
+    ResourceManager::LoadTexture("assets/sprites/square_white.png", true, "square_white");
+    ResourceManager::LoadTexture("assets/cursors/cursor_hand.png", true, "cursor_hand");
 //    ResourceManager::LoadTexture("assets/atlas/mario_atlas.png", true, "mario_atlas");
 //    ResourceManager::LoadTexture("assets/atlas/atlas_test.png", true, "atlas_test");
 
@@ -58,8 +60,8 @@ void Game::update(float deltaTime)
 {
 //    std::cout << "DT: " << deltaTime << std::endl;
     // NOTE: Animation tests. It should render sprites at a fixed timestep
-    if ((int) deltaTime % 6 == 0)
-    {
+//    if ((int) deltaTime % 6 == 0)
+//    {
         // Mario running
         marioAnimIdx += 1;
         if (marioAnimIdx > 2)
@@ -74,14 +76,19 @@ void Game::update(float deltaTime)
         blockAnimIdx += 1;
         if (blockAnimIdx > 7)
             blockAnimIdx = 4;
-    }
+//    }
 }
 
 void Game::render()
 {
-    renderer2D->drawSprite(marioAtlas.getSprite(marioAnimIdx), glm::vec2(0.0f, 0.0f), glm::vec2(48.0f, 96.0f));
-    renderer2D->drawSprite(objectsAtlas.getSprite(coinAnimIdx), glm::vec2(64.0f, 0.0f), glm::vec2(48.0f, 48.0f));
-    renderer2D->drawSprite(objectsAtlas.getSprite(blockAnimIdx), glm::vec2(128.0f, 0.0f), glm::vec2(48.0f, 48.0f));
+    // Cursor Test
+    renderer2D->drawCursor(Input::getMousePosition(), glm::vec2(32.0f, 32.0f));
+
+    // Sprites Animation Test
+//    renderer2D->drawSprite(marioAtlas.getSprite(marioAnimIdx), glm::vec2(0.0f, 0.0f), glm::vec2(48.0f, 96.0f));
+//    renderer2D->drawSprite(objectsAtlas.getSprite(coinAnimIdx), glm::vec2(64.0f, 0.0f), glm::vec2(48.0f, 48.0f));
+//    renderer2D->drawSprite(objectsAtlas.getSprite(blockAnimIdx), glm::vec2(128.0f, 0.0f), glm::vec2(48.0f, 48.0f));
+
 //    renderer2D->drawQuad(glm::vec2(0.0f, 0.0f), glm::vec2(100.0f, 100.0f), Color::Cyan);
 //    renderer2D->drawSprite(ResourceManager::GetTexture("mario_atlas"), glm::vec2(0.0f, 0.0f), glm::vec2(544.0f, 416.0f));
 }
