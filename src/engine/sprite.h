@@ -7,6 +7,7 @@
 
 #include "texture.h"
 #include "shader.h"
+#include "math/vec2.h"
 
 class Sprite
 {
@@ -14,7 +15,9 @@ private:
 //    Shader shader;
 public:
     Texture2D texture2D;
-    glm::vec2 texCoords[4];
+    Vec2 texCoords[4];
+    int texWidth;
+    int texHeight;
 
     Sprite(const Texture2D &texture2D);
 //    Sprite(const char *fileName, bool useAlpha);

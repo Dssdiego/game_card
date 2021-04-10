@@ -20,7 +20,8 @@ public:
 
     void drawQuad(glm::vec2 position, glm::vec2 size, Color color = Color::White);
     void drawCursor(glm::vec2 position, glm::vec2 size, Color color = Color::White);;
-    void drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, Color color = Color::White);
+//    void drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, Color color = Color::White);
+    void drawSprite(Sprite sprite, glm::vec2 position, float scale, Color color = Color::White);
     void drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 size, Color color = Color::White);
 private:
     Shader shader;

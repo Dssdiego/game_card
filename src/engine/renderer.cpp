@@ -104,12 +104,12 @@ void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 s
     glBindVertexArray(0);
 }
 
-void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, Color color)
+void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, float scale, Color color)
 {
     // Configure VAO/VBO
     unsigned int vbo;
 
-    glm::vec2 texCoords[4];
+    Vec2 texCoords[4];
     texCoords[0] = sprite.texCoords[0];
     texCoords[1] = sprite.texCoords[1];
     texCoords[2] = sprite.texCoords[2];
@@ -154,6 +154,7 @@ void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, C
         .Use()
         .SetMatrix4("projection", projection);
 
+    glm::vec2 size = glm::vec2(sprite.texWidth * scale, sprite.texHeight * scale);
     glm::mat4 model = glm::mat4(1.0f);
 
     model = glm::translate(model, glm::vec3(position, 0.0f));
