@@ -31,7 +31,7 @@ SpriteAtlas::SpriteAtlas(const Texture2D &texture2D, int spriteWidth, int sprite
         Vec2 topLeft = Vec2(posX, posY);                                   // (0,0)    (0,84)
         Vec2 topRight = Vec2(posX + spriteWidth, posY);                 // (60,0)   (60,84)
         Vec2 bottomLeft = Vec2(posX, posY + spriteHeight);              // (0, 84)  (0,168)
-        Vec2 bottomRight = Vec2(spriteWidth, posY + spriteHeight);      // (60,84)  (60,168)
+        Vec2 bottomRight = Vec2(posX + spriteWidth, posY + spriteHeight);      // (60,84)  (60,168)
 
         // FIXME: This is not a good practice. Treat origin at (0,0) bottom-left and redo the code!
         //  https://gamedev.stackexchange.com/questions/26175/how-do-i-load-a-texture-in-opengl-where-the-origin-of-the-texture0-0-isnt-in
