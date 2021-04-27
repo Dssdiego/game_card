@@ -86,6 +86,7 @@ add_executable(${PROJECT_NAME} WIN32 ${SOURCE_FILES})
 # include libraries
 include_directories(libs/glm
                     libs/stb
+                    libs/csv
                     ${FMOD_INCLUDE_DIR})
 
 # make assets directory in build
