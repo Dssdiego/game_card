@@ -32,6 +32,8 @@ namespace Graphics
     void shutdown();
 
     // Getters
+    int getWidth();
+    int getHeight();
     WindowSize getWindowSize();
 }
 

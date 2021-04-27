@@ -6,6 +6,7 @@
 #define GL_SILENCE_DEPRECATION
 
 #include "graphics.h"
+#include "time.h"
 
 #include <SDL.h>
 #include <iostream>
@@ -23,8 +24,13 @@ SDL_Window *window;
 SDL_GLContext glContext;
 unsigned int quadVAO;
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+// FIXME: This is duplicate in the main class, but this is the original
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
+const std::string gameName = "Mario Solitaire";
+
+int fpsCounter = 0;
 
 void Graphics::init(Config *config)
 {
@@ -46,7 +52,7 @@ void Graphics::init(Config *config)
 
     // Create window
     window = SDL_CreateWindow(
-            "Mario",
+            gameName.c_str(),
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             SCREEN_WIDTH, SCREEN_HEIGHT,
             SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI
@@ -112,6 +118,15 @@ void Graphics::clear(Color color)
 
 void Graphics::draw()
 {
+    if (fpsCounter > 60)
+    {
+        std::string title = gameName + " | Frame: " + std::to_string(Time::delta) + " ms";
+        SDL_SetWindowTitle(window, title.c_str());
+        fpsCounter = 0;
+    }
+
+    fpsCounter++;
+
     // Swap buffers and present to the screen
     SDL_GL_SwapWindow(window);
 }
@@ -130,4 +145,14 @@ WindowSize Graphics::getWindowSize()
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
     return WindowSize(w, h);
+}
+
+int Graphics::getWidth()
+{
+    return SCREEN_WIDTH;
+}
+
+int Graphics::getHeight()
+{
+    return SCREEN_HEIGHT;
 }
