@@ -6,6 +6,7 @@
 #define MARIO_COLOR_H
 
 #include <glm/vec4.hpp>
+#include <string>
 
 struct Color
 {
@@ -14,6 +15,9 @@ struct Color
 
     // Constructor
     Color(float r, float g, float b, float a);
+    Color(std::string hex);
+
+    Color();
 
     // Color definitions
     static const Color Transparent;
@@ -25,6 +29,7 @@ struct Color
     static const Color Yellow;
     static const Color Pink;
     static const Color Cyan;
+    static const Color Background;
 };
 
 
