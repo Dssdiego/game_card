@@ -12,7 +12,7 @@
 class SpriteAtlas
 {
 public:
-    SpriteAtlas() {};
+    SpriteAtlas();
     SpriteAtlas(const Texture2D &texture2D, int spriteWidth, int spriteHeight);
 
     ~SpriteAtlas() = default;
