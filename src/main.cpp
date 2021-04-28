@@ -16,7 +16,9 @@
 #include "engine/graphics.h"
 #include "engine/audio.h"
 #include "engine/input.h"
+#include "engine/time.h"
 
+// FIXME: This is duplicate in the graphics class, this is not the original
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
@@ -36,28 +38,28 @@ int main()
     game.init();
 
     // Hides the cursor
-    SDL_ShowCursor(SDL_DISABLE);
+//    SDL_ShowCursor(SDL_DISABLE);
 
     // Delta Time
-    float deltaTime = 1.0f / 60.0f;
-    float lastFrame = 0.0f;
+    Time::delta = 1.0f / 60.0f;
+    uint32_t lastFrame = 0.0f;
 
     // Window loop
     while (!closeWindow)
     {
         // Calculate delta time
-        float currentFrame = SDL_GetTicks();
-        deltaTime = currentFrame - lastFrame;
+        uint32_t currentFrame = SDL_GetTicks();
+        Time::delta = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
         // Game input
-        game.processInput(deltaTime);
+        game.processInput();
 
         // Game update
-        game.update(deltaTime);
+        game.update();
 
         // Game render
-        Graphics::clear(Color::Pink);
+        Graphics::clear(Color::Background);
         game.render();
 
         // Process inputs
@@ -93,6 +95,7 @@ int main()
             }
         }
 
+        // Draw stuff on the screen (a.k.a swap the back and front buffers)
         Graphics::draw();
     }
 
