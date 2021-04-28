@@ -114,7 +114,7 @@ void Shader::Compile(std::vector<std::string> &source)
     glShaderSource(vertShader, 1, &vertShaderSrc, nullptr);
     glCompileShader(vertShader);
 
-    checkCompileErrors(vertShader, ShaderObjectType::Vertex);
+    checkCompileErrors(vertShader, ShaderObjectType::VertexObj);
 
     // Fragment shader
     fragShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -151,6 +151,10 @@ void Shader::Compile(std::vector<std::string> &source)
 
     if (geomShaderSrc != nullptr && *geomShaderSrc != '\0')
         glDeleteShader(geomShader);
+
+    // Detach shader
+    glDetachShader(this->Id, vertShader);
+    glDetachShader(this->Id, fragShader);
 }
 
 void Shader::checkCompileErrors(unsigned int object, ShaderObjectType type)

@@ -12,7 +12,7 @@
 
 enum ShaderObjectType
 {
-    Vertex,
+    VertexObj,
     Fragment,
     Geometry,
     Program
