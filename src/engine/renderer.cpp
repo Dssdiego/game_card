@@ -41,7 +41,7 @@ Renderer2D::Renderer2D()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     glBindVertexArray(this->quadVAO);       // bind
-    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(0); // (location = 0) in the shader
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_TRUE, 4 * sizeof(float), nullptr);
     glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind
     glBindVertexArray(0);
@@ -70,12 +70,17 @@ Renderer2D::~Renderer2D()
 
 void Renderer2D::drawQuad(glm::vec2 position, glm::vec2 size, Color color)
 {
-    drawSprite(ResourceManager::GetTexture("square_white"), position, size, color);
+//    drawSprite(ResourceManager::GetTexture("square_white"), position, size, color);
 }
 
 void Renderer2D::drawCursor(glm::vec2 position, glm::vec2 size, Color color)
 {
     drawSprite(ResourceManager::GetTexture("cursor_hand"), position, size, color);
+}
+
+void Renderer2D::drawBoundingBox(glm::vec2 position, glm::vec2 size, Color color)
+{
+    drawSprite(ResourceManager::GetTexture("bounding_box"), position, size, color);
 }
 
 void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 size, Color color)
@@ -115,24 +120,34 @@ void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, float scale, Colo
     texCoords[2] = sprite.texCoords[2];
     texCoords[3] = sprite.texCoords[3];
 
-    float vertices[] = {
-            // position //texture
-            // first triangle
-            0.0f, 1.0f, texCoords[0].x, texCoords[0].y, // top-left
-            1.0f, 0.0f, texCoords[1].x, texCoords[1].y, // bottom-right
-            0.0f, 0.0f, texCoords[2].x, texCoords[2].y, // bottom-left
+    std::vector<glm::vec4> vertices;
+    vertices.emplace_back(0.0f, 1.0f, texCoords[0].x, texCoords[0].y);
+    vertices.emplace_back(1.0f, 0.0f, texCoords[1].x, texCoords[1].y);
+    vertices.emplace_back(0.0f, 0.0f, texCoords[2].x, texCoords[2].y);
+    vertices.emplace_back(0.0f, 1.0f, texCoords[0].x, texCoords[0].y);
+    vertices.emplace_back(1.0f, 1.0f, texCoords[3].x, texCoords[3].y);
+    vertices.emplace_back(1.0f, 0.0f, texCoords[1].x, texCoords[1].y);
+//    std::reverse(vertices.begin(), vertices.end());
 
-            // second triangle
-            0.0f, 1.0f, texCoords[0].x, texCoords[0].y, // top-left
-            1.0f, 1.0f, texCoords[3].x, texCoords[3].y, // top-right
-            1.0f, 0.0f, texCoords[1].x, texCoords[1].y  // bottom-right
-    }; // (0,0) being top-left corner of the quad
+//    float vertices[] = {
+//            // position //texture
+//            // first triangle
+//            0.0f, 1.0f, texCoords[0].x, texCoords[0].y, // top-left
+//            1.0f, 0.0f, texCoords[1].x, texCoords[1].y, // bottom-right
+//            0.0f, 0.0f, texCoords[2].x, texCoords[2].y, // bottom-left
+//
+//            // second triangle
+//            0.0f, 1.0f, texCoords[0].x, texCoords[0].y, // top-left
+//            1.0f, 1.0f, texCoords[3].x, texCoords[3].y, // top-right
+//            1.0f, 0.0f, texCoords[1].x, texCoords[1].y  // bottom-right
+//    }; // (0,0) being top-left corner of the quad
 
     glGenVertexArrays(1, &this->quadVAO);
     glGenBuffers(1, &vbo);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(std::vector<float>), &vertices.front(), GL_STATIC_DRAW);
 
     glBindVertexArray(this->quadVAO);       // bind
     glEnableVertexAttribArray(0);
