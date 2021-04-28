@@ -7,26 +7,31 @@
 
 #include <glm/glm.hpp>
 #include "../engine/sprite.h"
+#include "../engine/math/rect.h"
 
+/// Suit of the cards
 enum Suit
 {
-    Clubs,      // ♣
-    Diamonds,   // ♦
-    Hearts,     // ♥
-    Spades      // ♠
+    Clubs,      /// ♣
+    Diamonds,   /// ♦
+    Hearts,     /// ♥
+    Spades      /// ♠
 };
 
 class Card
 {
 public:
-    Card(const Sprite &sprite, Suit suit, int value);
+//    Card(const Sprite &sprite, Suit suit, int value);
+//    Card(int atlasIndex, CardValue cardValue, Suit suit, int value);
+    Card(int atlasIndex, std::string cardName, Suit suit, int value);
 
-private:
     glm::vec2 position;
-    Sprite sprite;
+private:
+    int atlasIndex;
+    std::string cardName;
     Suit suit;
-    int value; // Ranges from 1 to 10
+    Rect bounds;
+    int value; /// Range (1-13), A = 1, ..., J = 11, Q = 12, K = 13
 };
-
 
 #endif //MARIO_CARD_H

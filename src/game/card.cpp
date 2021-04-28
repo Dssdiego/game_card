@@ -4,5 +4,6 @@
 
 #include "card.h"
 
-Card::Card(const Sprite &sprite, Suit suit, int value) : sprite(sprite), suit(suit), value(value)
-{}
+Card::Card(int atlasIndex, std::string cardName, Suit suit, int value) : atlasIndex(atlasIndex), cardName(cardName), suit(suit), value(value)
+{
+}
