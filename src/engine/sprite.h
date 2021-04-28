@@ -11,8 +11,6 @@
 
 class Sprite
 {
-private:
-//    Shader shader;
 public:
     Texture2D texture2D;
     Vec2 texCoords[4];
@@ -20,9 +18,14 @@ public:
     int texHeight;
 
     Sprite(const Texture2D &texture2D);
+//    Sprite(const Texture2D &texture2D, int textWidth, int texHeight);
+    ~Sprite();
 //    Sprite(const char *fileName, bool useAlpha);
 //    void draw(glm::vec2 position, float rotation, glm::vec3 color);
 //    void draw(glm::vec2 position, glm::vec2 size, float rotation, glm::vec3 color);
+private:
+    bool dirty;
+//    glm::mat4 model;
 };
 
 
