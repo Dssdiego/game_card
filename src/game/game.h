@@ -23,8 +23,8 @@ public:
     ~Game();
 
     void init();
-    void processInput(float deltaTime);
-    void update(float deltaTime);
+    void processInput();
+    void update();
     void render();
 };
 
