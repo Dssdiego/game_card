@@ -5,19 +5,39 @@
 #ifndef MARIO_DECK_H
 #define MARIO_DECK_H
 
-#include <vector>
+#include <map>
 #include "card.h"
+#include "face.h"
+#include "../engine/renderer.h"
+#include "../engine/sprite_atlas.h"
 
 class Deck
 {
 public:
-    void createCards();
-//    void shuffle();
+    Deck();
+
+    void mapCards();
+    void mapFaceTypes();
+    void shuffleCards();
+
+    bool hasCards();
+
+    glm::vec2 position;
+    Rect bounds;
+
+    Card getTopCard();
+
+    void render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas);
+
+    void update();
+
 private:
     std::vector<Card> cards;
-//    int numOfCards;
+    std::vector<Face> faces;
+    Suit getSuitEnum(std::string suit);
+    FaceType getFaceTypeEnum(std::string face);
 
+    bool canDrag = false;
 };
-
 
 #endif //MARIO_DECK_H
