@@ -35,7 +35,9 @@ if(WIN32)
             DESTINATION ${CMAKE_BINARY_DIR})
 
     include_directories(${GLEW_INCLUDE_DIR})
-else()
+endif()
+
+if(APPLE)
     # let FindSDL2.cmake figure out where it is on Mac/Linux
     # Put the FindSDL2.cmake in ./cmake and tell CMake to find it there
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
@@ -62,15 +64,33 @@ endif()
 
 # Linux Configurations
 if(UNIX AND NOT APPLE)
+    message("==== LINUX =====")
+    # let FindSDL2.cmake figure out where it is on Mac/Linux
+    # Put the FindSDL2.cmake in ./cmake and tell CMake to find it there
+    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
+    set(SDL2MAIN_LIBRARY "")
+
+    find_package(SDL2 REQUIRED)
+    find_package(SDL2_image REQUIRED)
+
+    # Find OpenGL
+    find_package(OpenGL REQUIRED)
+    # find_package(SDL2_ttf REQUIRED)
+
+    message("Setup FMOD")
     # Setup FMOD library
     set(FMOD_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/fmod/inc")
+    message("FMOD Include: ${FMOD_INCLUDE_DIR}")
     set(FMOD_LIBRARY
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.8"
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.8")
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.9"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.9")
+    message("FMOD Library: ${FMOD_LIBRARY}")
     file(COPY
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.8"
-            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.8"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmod.so.12.9"
+            "${CMAKE_SOURCE_DIR}/libs/fmod/lib/linux/libfmodL.so.12.9"
             DESTINATION ${CMAKE_BINARY_DIR})
+
 endif()
 
 # include SDL and OpenGL directories
