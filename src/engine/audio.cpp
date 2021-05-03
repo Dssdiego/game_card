@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fmod_errors.h>
 #include "audio.h"
+#include "profiling/profiler.h"
 
 FMOD_RESULT result;
 FMOD::System *audioSystem;
@@ -34,7 +35,6 @@ void Audio::init()
     {
         std::cout << "Error initializing FMOD Audio System!" << std::endl;
         std::cout << "Error: " << FMOD_ErrorString(result) << std::endl;
-        exit(EXIT_FAILURE);
     }
 
     createChannels();
