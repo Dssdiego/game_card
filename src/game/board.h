@@ -12,7 +12,7 @@
 #include "../engine/renderer.h"
 #include "foundation_pile.h"
 #include "card_pile.h"
-#include "../engine/graphics/sprite_batch.h"
+//#include "../engine/graphics/sprite_batch.h"
 
 class Board
 {
@@ -36,7 +36,7 @@ private:
 //    const glm::vec2 drawPosition = {112.0f, 16.0f};
 
     // Variables
-    SpriteBatch batch;
+//    SpriteBatch batch;
     SpriteAtlas cardAtlas;
     Renderer2D *renderer2D;
     Deck *deck;
