@@ -8,9 +8,10 @@
 #include "../engine/renderer.h"
 #include "../engine/sprite_atlas.h"
 #include "../engine/input.h"
-#include "../engine/batch.h"
+//#include "../engine/batch.h"
 #include "deck.h"
 #include "board.h"
+#include "../engine/profiling/profiler.h"
 
 //Renderer2D *renderer2D;
 
@@ -42,6 +43,7 @@ Game::~Game()
 
 void Game::init()
 {
+    InstrumentationTimer timer("Game::Init");
     board = new Board();
     board->init();
 //    ResourceManager::LoadTexture("assets/sprites/square_white.png", true, "square_white");
@@ -72,11 +74,12 @@ void Game::init()
 
 void Game::processInput()
 {
-
+    InstrumentationTimer timer("Game::ProcessInput");
 }
 
 void Game::update()
 {
+    InstrumentationTimer timer("Game::Update");
     board->update();
 //    std::cout << "DT: " << deltaTime << std::endl;
     // NOTE: Animation tests. It should render sprites at a fixed timestep
@@ -101,6 +104,7 @@ void Game::update()
 
 void Game::render()
 {
+    InstrumentationTimer timer("Game::Render");
     board->render();
     // FIXME: Rendering sprites from two different textures make the "second" completely black.
     //  I think this is because of the 'ActiveTexture' flag setting on OpenGL. The way to solve this is to

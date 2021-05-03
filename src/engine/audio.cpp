@@ -18,6 +18,8 @@ FMOD::Channel *titleChannel;
 
 void Audio::init()
 {
+    InstrumentationTimer timer("Audio::Init");
+
     result = FMOD::System_Create(&audioSystem);
     if(result != FMOD_OK)
     {
@@ -77,6 +79,8 @@ void Audio::stopAll(AudioChannel channel)
 
 void Audio::shutdown()
 {
+    InstrumentationTimer timer("Audio::Shutdown");
+
     sfxChannel->release();
     musicChannel->release();
 

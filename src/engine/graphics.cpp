@@ -7,6 +7,7 @@
 
 #include "graphics.h"
 #include "time.h"
+#include "profiling/profiler.h"
 
 #include <SDL.h>
 #include <iostream>
@@ -34,6 +35,8 @@ int fpsCounter = 0;
 
 void Graphics::init(Config *config)
 {
+    InstrumentationTimer timer("Graphics::Init");
+
     // Init SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -112,12 +115,16 @@ void Graphics::clear()
 
 void Graphics::clear(Color color)
 {
+    InstrumentationTimer timer("Graphics::Clear");
+
     glClearColor(color.r, color.g, color.b, color.a);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Graphics::draw()
 {
+    InstrumentationTimer timer("Graphics::Draw");
+
     if (fpsCounter > 60)
     {
         std::string title = gameName + " | Frame: " + std::to_string(Time::delta) + " ms";
@@ -129,10 +136,13 @@ void Graphics::draw()
 
     // Swap buffers and present to the screen
     SDL_GL_SwapWindow(window);
+    InstrumentationTimer timer2("Graphics::SwapBuffer");
 }
 
 void Graphics::shutdown()
 {
+    InstrumentationTimer timer("Graphics::Shutdown");
+
     glDeleteVertexArrays(1, &quadVAO);
 
     SDL_GL_DeleteContext(glContext);

@@ -17,6 +17,7 @@
 #include "engine/audio.h"
 #include "engine/input.h"
 #include "engine/time.h"
+#include "engine/profiling/profiler.h"
 
 // FIXME: This is duplicate in the graphics class, this is not the original
 const int SCREEN_WIDTH = 800;
@@ -29,6 +30,8 @@ Config config;
 
 int main()
 {
+    Instrumentor::Get().BeginSession("Mario Solitaire", "profiling.json");
+
     // Read configuration
     config.readFile();
 
@@ -103,6 +106,8 @@ int main()
     ResourceManager::Clear();
     Graphics::shutdown();
     Audio::shutdown();
+
+    Instrumentor::Get().EndSession();
 
     // Closes the application
     return EXIT_SUCCESS;

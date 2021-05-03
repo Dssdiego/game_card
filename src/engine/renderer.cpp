@@ -17,6 +17,7 @@
 #include "renderer.h"
 #include "resource_manager.h"
 #include "graphics.h"
+#include "profiling/profiler.h"
 
 Renderer2D::Renderer2D()
 {
@@ -85,6 +86,8 @@ void Renderer2D::drawBoundingBox(glm::vec2 position, glm::vec2 size, Color color
 
 void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 size, Color color)
 {
+    InstrumentationTimer timer("Renderer2D::DrawSprite");
+
     glm::mat4 model = glm::mat4(1.0f);
 
     model = glm::translate(model, glm::vec3(position, 0.0f));
@@ -111,6 +114,8 @@ void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 s
 
 void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, float scale, Color color)
 {
+    InstrumentationTimer timer("Renderer2D::DrawSprite2");
+
     // Configure VAO/VBO
     unsigned int vbo;
 

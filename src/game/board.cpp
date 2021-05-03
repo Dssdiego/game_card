@@ -4,6 +4,7 @@
 
 #include "board.h"
 #include "../engine/resource_manager.h"
+#include "../engine/profiling/profiler.h"
 
 Board::Board()
 {
@@ -11,6 +12,7 @@ Board::Board()
 
 void Board::init()
 {
+    InstrumentationTimer timer("Board::Init");
     // Initialize Renderer
     renderer2D = new Renderer2D();
 
@@ -67,15 +69,17 @@ void Board::init()
 
 void Board::update()
 {
+    InstrumentationTimer timer("Board::Update");
     deck->update();
 }
 
 void Board::render()
 {
-    batch.begin();
-    deck->getTopCard();
+    InstrumentationTimer timer("Board::Render");
+//    batch.begin();
+//    deck->getTopCard();
 //    batch.add(deck);
-    batch.end();
+//    batch.end();
 
     // Deck
     deck->render(renderer2D, &cardAtlas);
