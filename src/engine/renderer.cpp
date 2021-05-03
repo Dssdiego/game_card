@@ -112,7 +112,7 @@ void Renderer2D::drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 s
     glBindVertexArray(0);
 }
 
-void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, float scale, Color color)
+void Renderer2D::drawSprite(const Sprite& sprite, glm::vec3 position, float scale, Color color)
 {
     InstrumentationTimer timer("Renderer2D::DrawSprite2");
 
@@ -177,7 +177,8 @@ void Renderer2D::drawSprite(Sprite sprite, glm::vec2 position, float scale, Colo
     glm::vec2 size = glm::vec2(sprite.texWidth * scale, sprite.texHeight * scale);
     glm::mat4 model = glm::mat4(1.0f);
 
-    model = glm::translate(model, glm::vec3(position, 0.0f));
+//    model = glm::translate(model, glm::vec3(position, 0.0f));
+    model = glm::translate(model, position);
 
     model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
     model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));

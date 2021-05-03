@@ -19,7 +19,7 @@ public:
     void render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas);
 
     std::vector<Card> cards;
-    glm::vec2 position;
+    glm::vec3 position;
 };
 
 

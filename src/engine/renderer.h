@@ -22,7 +22,7 @@ public:
     void drawCursor(glm::vec2 position, glm::vec2 size, Color color = Color::White);;
     void drawBoundingBox(glm::vec2 position, glm::vec2 size, Color color = Color::White);;
 //    void drawSprite(Sprite sprite, glm::vec2 position, glm::vec2 size, Color color = Color::White);
-    void drawSprite(Sprite sprite, glm::vec2 position, float scale = 1.0f, Color color = Color::White);
+    void drawSprite(const Sprite& sprite, glm::vec3 position, float scale = 1.0f, Color color = Color::White);
     void drawSprite(Texture2D texture2D, glm::vec2 position, glm::vec2 size, Color color = Color::White);
 private:
     Shader shader;

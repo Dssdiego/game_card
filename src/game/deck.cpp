@@ -90,7 +90,7 @@ void Deck::update()
         canDrag = true;
 
     if (canDrag)
-        position = Input::getMousePosition();
+        position = glm::vec3(Input::getMousePosition(), 0.0f);
 }
 
 Card Deck::getTopCard()

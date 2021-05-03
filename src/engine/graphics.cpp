@@ -92,6 +92,10 @@ void Graphics::init(Config *config)
     // OpenGL configuration
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS); // Accept fragment if it is closer to the camera than the former one
+
     // Print versions
     SDL_version sdlVersion;
     SDL_GetVersion(&sdlVersion);
@@ -110,7 +114,7 @@ void Graphics::clear()
 {
     Color color = Color::Black;
     glClearColor(color.r, color.g, color.b, color.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Graphics::clear(Color color)
@@ -118,7 +122,7 @@ void Graphics::clear(Color color)
     InstrumentationTimer timer("Graphics::Clear");
 
     glClearColor(color.r, color.g, color.b, color.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Graphics::draw()

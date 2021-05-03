@@ -25,43 +25,43 @@ void Board::init()
     deck->mapCards();
     deck->mapFaceTypes();
     deck->shuffleCards();
-    deck->position = {32.0f, 16.0f};
+    deck->position = {32.0f, 16.0f, 0.0f};
     deck->bounds = {deck->position, cardWidth, cardHeight};
 
     // Foundation Piles
     pileHearts = new FoundationPile();
-    pileHearts->position = {272.0f, 16.0f};
+    pileHearts->position = {272.0f, 16.0f, 0.0f};
 
     pileSpades = new FoundationPile();
-    pileSpades->position = {352.0f, 16.0f};
+    pileSpades->position = {352.0f, 16.0f, 0.0f};
 
     pileDiamonds = new FoundationPile();
-    pileDiamonds->position = {432.0f, 16.0f};
+    pileDiamonds->position = {432.0f, 16.0f, 0.0f};
 
     pileClubs = new FoundationPile();
-    pileClubs->position = {512.0f, 16.0f};
+    pileClubs->position = {512.0f, 16.0f, 0.0f};
 
     // Piles of Cards
     p1 = new CardPile();
-    p1->position = {32.0f, 128.0f};
+    p1->position = {32.0f, 128.0f, 1.0f};
 
     p2 = new CardPile();
-    p2->position = {112.0f, 128.0f};
+    p2->position = {112.0f, 128.0f, 1.0f};
 
     p3 = new CardPile();
-    p3->position = {192.0f, 128.0f};
+    p3->position = {192.0f, 128.0f, 1.0f};
 
     p4 = new CardPile();
-    p4->position = {272.0f, 128.0f};
+    p4->position = {272.0f, 128.0f, 1.0f};
 
     p5 = new CardPile();
-    p5->position = {352.0f, 128.0f};
+    p5->position = {352.0f, 128.0f, 1.0f};
 
     p6 = new CardPile();
-    p6->position = {432.0f, 128.0f};
+    p6->position = {432.0f, 128.0f, 1.0f};
 
     p7 = new CardPile();
-    p7->position = {512.0f, 128.0f};
+    p7->position = {512.0f, 128.0f, 1.0f};
 
     // TODO: Play Draw Cards Animation
 //    deck.drawCard();

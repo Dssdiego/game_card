@@ -25,7 +25,7 @@ public:
 //    Card(int atlasIndex, CardValue cardValue, Suit suit, int value);
     Card(int atlasIndex, std::string cardName, Suit suit, int value);
 
-    glm::vec2 position;
+    glm::vec3 position;
 private:
     int atlasIndex;
     std::string cardName;

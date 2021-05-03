@@ -22,7 +22,7 @@ public:
 
     bool hasCards();
 
-    glm::vec2 position;
+    glm::vec3 position;
     Rect bounds;
 
     Card getTopCard();
