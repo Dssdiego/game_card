@@ -54,7 +54,7 @@ Renderer2D::Renderer2D()
     WindowSize windowSize = Graphics::getWindowSize();
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(windowSize.width),
                                       static_cast<float>(windowSize.height), 0.0f,
-                                      -1.0f, 1.0f);
+                                      -1.01f, 1.01f);
 
     // Use shader
     shader
@@ -167,7 +167,7 @@ void Renderer2D::drawSprite(const Sprite& sprite, glm::vec3 position, float scal
     WindowSize windowSize = Graphics::getWindowSize();
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(windowSize.width),
                                       static_cast<float>(windowSize.height), 0.0f,
-                                      -1.0f, 1.0f);
+                                      -1.01f, 1.01f);
 
     // Use shader
     shader
