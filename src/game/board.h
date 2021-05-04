@@ -30,6 +30,7 @@ private:
 
     // Spacings
     const float cardVerticalSpacing = 24.0f;
+    const float cardHorizontalSpacing = 80.0f;
 
     // Default Positions
 //    const glm::vec2 deckPosition = {32.0f, 16.0f};
@@ -48,7 +49,8 @@ private:
     FoundationPile *pileSpades;
 
     // Card piles
-    CardPile *p1, *p2, *p3, *p4, *p5, *p6, *p7;
+    std::vector<CardPile> cardPiles;
+//    CardPile *p1, *p2, *p3, *p4, *p5, *p6, *p7;
 };
 
 

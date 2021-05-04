@@ -29,41 +29,30 @@ void Board::init()
     deck->bounds = {deck->position, cardWidth, cardHeight};
 
     // Foundation Piles
+    // REVIEW: Change this to std::vector<CardPile> ?
     pileHearts = new FoundationPile();
-    pileHearts->position = {272.0f, 16.0f, 0.0f};
+    pileHearts->position = {272.0f, 16.0f, -1.0f};
 
     pileSpades = new FoundationPile();
-    pileSpades->position = {352.0f, 16.0f, 0.0f};
+    pileSpades->position = {352.0f, 16.0f, -1.0f};
 
     pileDiamonds = new FoundationPile();
-    pileDiamonds->position = {432.0f, 16.0f, 0.0f};
+    pileDiamonds->position = {432.0f, 16.0f, -1.0f};
 
     pileClubs = new FoundationPile();
-    pileClubs->position = {512.0f, 16.0f, 0.0f};
+    pileClubs->position = {512.0f, 16.0f, -1.0f};
 
-    // Piles of Cards
-    p1 = new CardPile();
-    p1->position = {32.0f, 128.0f, 1.0f};
+    // Create Piles of Cards
+    float cardPilePosition = 32.0f;
+    for (int i = 0; i < 7; ++i)
+    {
+        auto *pile = new CardPile();
+        pile->position = { cardPilePosition, 128.0f, -1.0f };
+        cardPiles.emplace_back(*pile);
+        cardPilePosition += cardHorizontalSpacing;
+    }
 
-    p2 = new CardPile();
-    p2->position = {112.0f, 128.0f, 1.0f};
-
-    p3 = new CardPile();
-    p3->position = {192.0f, 128.0f, 1.0f};
-
-    p4 = new CardPile();
-    p4->position = {272.0f, 128.0f, 1.0f};
-
-    p5 = new CardPile();
-    p5->position = {352.0f, 128.0f, 1.0f};
-
-    p6 = new CardPile();
-    p6->position = {432.0f, 128.0f, 1.0f};
-
-    p7 = new CardPile();
-    p7->position = {512.0f, 128.0f, 1.0f};
-
-    // TODO: Play Draw Cards Animation
+// TODO: Play Draw Cards Animation
 //    deck.drawCard();
 }
 
@@ -90,12 +79,9 @@ void Board::render()
     pileDiamonds->render(renderer2D, &cardAtlas);
     pileClubs->render(renderer2D, &cardAtlas);
 
-    // Card Piles
-    p1->render(renderer2D, &cardAtlas);
-    p2->render(renderer2D, &cardAtlas);
-    p3->render(renderer2D, &cardAtlas);
-    p4->render(renderer2D, &cardAtlas);
-    p5->render(renderer2D, &cardAtlas);
-    p6->render(renderer2D, &cardAtlas);
-    p7->render(renderer2D, &cardAtlas);
+    // Render Card Piles
+    for (auto & cardPile : cardPiles)
+    {
+        cardPile.render(renderer2D, &cardAtlas);
+    }
 }
