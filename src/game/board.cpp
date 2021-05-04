@@ -47,10 +47,21 @@ void Board::init()
     for (int i = 0; i < 7; ++i)
     {
         auto *pile = new CardPile();
-        pile->position = { cardPilePosition, 128.0f, -1.0f };
+        pile->position = {cardPilePosition, 128.0f, -1.0f};
+        pile->lastCardPosition = pile->position;
         cardPiles.emplace_back(*pile);
         cardPilePosition += cardHorizontalSpacing;
     }
+
+    // Fill piles of cards
+    while (deck->hasCards())
+    {
+        for (auto &cardPile : cardPiles)
+        {
+            if (deck->hasCards())
+                cardPile.addCard(deck->pullCard());
+        }
+    };
 
 // TODO: Play Draw Cards Animation
 //    deck.drawCard();
@@ -80,7 +91,7 @@ void Board::render()
     pileClubs->render(renderer2D, &cardAtlas);
 
     // Render Card Piles
-    for (auto & cardPile : cardPiles)
+    for (auto &cardPile : cardPiles)
     {
         cardPile.render(renderer2D, &cardAtlas);
     }

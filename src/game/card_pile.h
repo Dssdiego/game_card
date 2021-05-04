@@ -17,12 +17,15 @@ public:
 
     virtual ~CardPile();
 
-    void addCard(const Card& card);
+    void addCard(Card card);
     void removeCard(const Card& card);
     void render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas);
 
     std::vector<Card> cards;
     glm::vec3 position;
+    glm::vec3 lastCardPosition;
+private:
+    float verticalSpacing = 24.0f;
 };
 
 

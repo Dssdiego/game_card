@@ -26,6 +26,7 @@ public:
     Rect bounds;
 
     Card getTopCard();
+    Card pullCard(); // Removes a card from the deck and returns
 
     void render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas);
 

@@ -26,8 +26,8 @@ public:
     Card(int atlasIndex, std::string cardName, Suit suit, int value);
 
     glm::vec3 position;
-private:
     int atlasIndex;
+private:
     std::string cardName;
     Suit suit;
     Rect bounds;

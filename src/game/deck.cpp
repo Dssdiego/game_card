@@ -90,10 +90,23 @@ void Deck::update()
         canDrag = true;
 
     if (canDrag)
-        position = glm::vec3(Input::getMousePosition(), 0.0f);
+        position = glm::vec3(Input::getMousePosition(), -1.0f);
 }
 
 Card Deck::getTopCard()
 {
     return cards.front();
 }
+
+Card Deck::pullCard()
+{
+    // Get the last card of the vector
+    Card pulledCard = cards.back();
+
+    // Removes the card from the vector
+    cards.pop_back();
+
+    // Returns pulled card
+    return pulledCard;
+}
+

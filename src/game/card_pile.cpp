@@ -5,7 +5,8 @@
 #include "card_pile.h"
 
 CardPile::CardPile()
-{}
+{
+}
 
 CardPile::~CardPile()
 {
@@ -13,22 +14,20 @@ CardPile::~CardPile()
 
 void CardPile::render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas)
 {
-//    for (int i = 0; i < cards.size(); ++i)
-//    {
-//
-//    }
-
-    renderer2D->drawSprite(cardAtlas->getSprite(0), this->position);
+    for (auto & card : cards)
+    {
+        renderer2D->drawSprite(cardAtlas->getSprite(card.atlasIndex), card.position);
+    }
 }
 
-void CardPile::addCard(const Card& card)
+void CardPile::addCard(Card card)
 {
+    card.position = lastCardPosition;
     cards.push_back(card);
+    lastCardPosition = {lastCardPosition.x, lastCardPosition.y + verticalSpacing, lastCardPosition.z + 0.1f};
 }
 
 void CardPile::removeCard(const Card &card)
 {
-    // TODO: Implement
-//    cards.
 }
 
