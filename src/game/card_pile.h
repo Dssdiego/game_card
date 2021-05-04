@@ -15,7 +15,10 @@ class CardPile
 public:
     CardPile();
 
+    virtual ~CardPile();
+
     void addCard(const Card& card);
+    void removeCard(const Card& card);
     void render(Renderer2D *renderer2D, SpriteAtlas *cardAtlas);
 
     std::vector<Card> cards;
