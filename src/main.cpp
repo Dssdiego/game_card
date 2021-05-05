@@ -88,7 +88,16 @@ int main()
 //            std::cout << "MouseX: " << mouseX << std::endl;
 //            std::cout << "MouseY: " << mouseY << std::endl;
 
+            // Mouse Button Up Binding
+            if (event.type == SDL_MOUSEBUTTONDOWN)
+                Input::sdlMouseButtonDown(event.button);
+
+            // Mouse Button Down Binding
+            if (event.type == SDL_MOUSEBUTTONUP)
+                Input::sdlMouseButtonUp(event.button);
+
             // REVIEW: Might be wrong
+            // FIXME: Keys array should be on the input class instead of game class
             if (event.key.keysym.scancode >= 0)
             {
                 if (event.type == SDL_KEYDOWN)
